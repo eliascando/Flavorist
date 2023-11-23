@@ -1,0 +1,23 @@
+<div class="form-container">
+    <h2>Bienvenido a Flavorist</h2>
+    <h3>Crea tu cuenta!</h3>
+    <img src="../../../assets/logo-small.svg" alt="Logo" class="form-logo">
+    <form>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Tu email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" placeholder="Tu contraseña" formControlName="password">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Registrarse!</button>
+        <button mat-raised-button color="primary" type="button" routerLink="/auth/singin">Volver</button>
+        <p class="or-separator">o</p>
+        <button mat-raised-button type="button" class="google-btn">
+            <img src="../../../assets/img/logo-google.png" alt="Google logo"> Continuar con Google
+        </button>
+    </form>
+</div>
