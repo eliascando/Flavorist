@@ -14,7 +14,7 @@
         </mat-form-field>
 
         <button mat-raised-button color="primary" type="submit">Iniciar Sesion</button>
-        <button mat-raised-button color="primary" type="button" routerLink="/auth/singup">Registrate</button>
+        <button mat-raised-button color="primary" type="button" (click)="setRegister()">Registrate</button>
         <p class="or-separator">o</p>
         <button mat-raised-button type="button" class="google-btn">
             <img src="../../../assets/img/logo-google.png" alt="Google logo"> Continuar con Google

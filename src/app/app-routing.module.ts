@@ -9,17 +9,14 @@ import { ProfileComponent } from './components/main/profile/profile.component';
 import { NotificationComponent } from './components/main/notification/notification.component';
 import { PostCreationComponent } from './components/main/post-creation/post-creation.component';
 import { ConfigurationComponent } from './components/main/configuration/configuration.component';
+import { AuthenticationComponent } from './components/authentication/authentication.component';
 
 const routes: Routes = [
   {
     path: '', redirectTo: '/auth', pathMatch: 'full'
   },
   { 
-    path: 'auth', 
-    children: [
-      { path: 'singin', component: SinginComponent },
-      { path: 'singup', component: SingupComponent }
-    ]
+    path: 'auth', component: AuthenticationComponent,
   },
   { 
     path: 'main', component: MainComponent,

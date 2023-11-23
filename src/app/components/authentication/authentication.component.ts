@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
 export class AuthenticationComponent {
   
     constructor() { }
-
-    @Input() sesion: boolean;
+    
+    @Input() singup: boolean;
 }

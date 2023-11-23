@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRequest } from 'src/app/interfaces/loginRequest';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationComponent } from '../authentication.component';
 
 @Component({
   selector: 'app-singin',
@@ -22,6 +23,10 @@ export class SinginComponent {
     this.form = this.createMyForm();
   }
 
+  public setRegister(): void {
+    this.authComponent.singup = true;
+  }
+
   public iniciarSesion(): void {
     if(this.form.invalid) {
       alert('Formulario invalido');
@@ -35,7 +40,7 @@ export class SinginComponent {
     console.log(this.sesion);
 
     if(this.authService.login(this.sesion as LoginRequest)) {
-      this.router.navigateByUrl('/main');
+      this.router.navigateByUrl('/main/home');
     } else {
       alert('Usuario o contraseña incorrectos');
     }
@@ -49,6 +54,6 @@ export class SinginComponent {
     })
   }
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthenticationService) {}
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthenticationService, private authComponent: AuthenticationComponent) {}
 
 }
