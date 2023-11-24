@@ -33,6 +33,7 @@ import { PostCreationComponent } from './components/main/post-creation/post-crea
 import { ProfileComponent } from './components/main/profile/profile.component';
 import { NavBarMainComponent } from './components/main/nav-bar-main/nav-bar-main.component';
 import { CommonModule } from '@angular/common';
+import { PostComponent } from './components/main/post/post.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CommonModule } from '@angular/common';
     ExplorerComponent,
     PostCreationComponent,
     ProfileComponent,
-    NavBarMainComponent
+    NavBarMainComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
