@@ -1,1 +1,78 @@
-<p>post-creation works!</p>
+<div class="form-container">
+    <form #recipeForm="ngForm" (ngSubmit)="submitForm()">
+      <div class="form-content">
+  
+        <!-- Área de carga de archivos a la izquierda -->
+        <div class="upload-container">
+          <input type="file" id="photo" name="photo" ngModel hidden (change)="onFileSelect($event)" #fileInput>
+          <div class="upload-area" (click)="fileInput.click()">
+            <i class="upload-icon">📤</i>
+            <p>Elige un archivo o arrástralo y suéltalo aquí</p>
+            <small>Se recomienda usar archivos jpg de alta calidad de menos de 20MB o archivos mp4 que tengan menos de 200MB.</small>
+          </div>
+          <button type="button" (click)="fileInput.click()">Cargar foto</button>
+        </div>
+  
+        <!-- Resto de campos del formulario a la derecha -->
+        <div class="fields-container">
+            <div class="input-field">
+                <label for="title">Título:</label>
+                <input type="text" id="title" name="title" ngModel placeholder="Añade un título">
+              </div>
+        
+              <div class="input-field">
+                <label for="description">Descripción:</label>
+                <textarea id="description" name="description" ngModel rows="4" placeholder="Añade una descripción detallada"></textarea>
+              </div>
+        
+              <div class="input-field">
+                <label for="prepTime">Tiempo de Preparación:</label>
+                <input type="text" id="prepTime" name="prepTime" ngModel placeholder="Tiempo estimado en minutos">
+              </div>
+        
+              <div class="input-field">
+                <label for="category">Categoría:</label>
+                <select id="category" name="category" ngModel>
+                  <option value="Vegana">Vegana</option>
+                  <option value="Postres">Postre</option>
+                  <option value="sin Lacteos">Sin Lacteo</option>
+                  <option value="Sin Gluten">Sin Gluten</option>
+                </select>
+              </div>
+        
+              <div class="input-field">
+                <label for="steps">Pasos:</label>
+                <input type="number" id="steps" name="steps" ngModel placeholder="Número de pasos">
+              </div>
+        
+              <div class="input-field">
+                <label for="ingredients">Lista de Ingredientes:</label>
+                <textarea id="ingredients" name="ingredients" ngModel rows="4" placeholder="Ingredientes separados por comas"></textarea>
+              </div>
+        
+              <div class="input-field">
+                <label for="difficulty">Dificultad:</label>
+                <select id="difficulty" name="difficulty" ngModel>
+                  <option value="baja">Baja</option>
+                  <option value="media">Media</option>
+                  <option value="alta">Alta</option>
+                </select>
+              </div>
+        
+              <div class="input-field">
+                <label for="servings">Porciones:</label>
+                <input type="number" id="servings" name="servings" ngModel placeholder="Número de porciones">
+              </div>
+        
+              <div class="input-field">
+                <label for="cost">Costo:</label>
+                <input type="text" id="cost" name="cost" ngModel placeholder="Costo estimado de ingredientes">
+              </div>
+        
+              <button type="submit" class="submit-button">Crear Receta</button>
+
+        </div>
+  
+      </div>
+    </form>
+  </div>

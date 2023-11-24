@@ -1,0 +1,85 @@
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .form-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .upload-container {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .upload-area {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .fields-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input[type="text"], input[type="number"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #FF3911;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block; /* Hacer que el botón ocupe todo el ancho */
+  }
+  
+  button:hover {
+    background-color: darken(#FF3911, 10%);
+  }
+  
+  @media (max-width: 768px) {
+    .form-container {
+      flex-direction: column;
+    }
+  
+    .upload-container, 
+    .fields-container {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  
+    .upload-area {
+      height: auto;
+    }
+  
+    .form-content {
+      flex-direction: column;
+    }
+  }
+  

@@ -1,1 +1,55 @@
-<p>profile works!</p>
+<div class="perfil-container">
+     
+    <div class="perfil-info">
+      <img src="../../../../assets/perfildefault.webp" alt="Foto de perfil">
+      <h1>{{ nombre }} {{ apellido }}</h1>
+      <p>Usuario: @{{ usuario }}</p>
+      <p>Seguidores: 100 | Siguiendo: 50</p>
+      <button (click)="compartir()">Compartir</button>
+      <button (click)="abrirFormularioEdicion()">Editar Perfil</button>
+    </div>
+  
+    <ng-container *ngIf="mostrarFormulario; else mostrarInfoPerfil">
+    <!-- Suponiendo que este es parte de tu componente de perfil -->
+    <div class="formulario-edicion">
+        <label for="nuevoNombre">Nuevo Nombre:</label>
+        <input type="text" id="nuevoNombre" [(ngModel)]="nuevoNombre" required>
+
+        <label for="nuevoApellido">Nuevo Apellido:</label>
+        <input type="text" id="nuevoApellido" [(ngModel)]="nuevoApellido" required>
+
+        <label for="nuevoUsuario">Nuevo Usuario:</label>
+        <input type="text" id="nuevoUsuario" [(ngModel)]="nuevoUsuario" required>
+
+        <label for="foto">Foto de perfil:</label>
+        <input type="file" id="foto" (change)="cargarNuevaFoto($event)">
+
+        <div class="botones-container">
+            <button (click)="guardarCambios()">Guardar Cambios</button>
+            <button (click)="cerrarFormularioEdicion()">Cancelar</button>
+        </div>
+    </div>
+
+    </ng-container>
+  
+    
+    <ng-template #mostrarInfoPerfil>
+      
+      <div class="pestañas-container">
+        <div class="pestaña-creado" (click)="mostrarPestana('creado')" [class.selected]="pestanaActual === 'creado'">
+          <h2>Creado</h2>
+        </div>
+        <div class="pestaña-guardado" (click)="mostrarPestana('guardado')" [class.selected]="pestanaActual === 'guardado'">
+          <h2>Guardado</h2>
+        </div>
+      </div>
+  
+
+      <div class="contenido-pestaña">
+        <div *ngIf="pestanaActual === 'creado'" class="fotos-creadas-container">
+          <img *ngFor="let foto of fotosCreadas" [src]="'../../../../assets//img/' + foto" alt="Fotos Creadas" class="foto-creada">
+        </div>
+        <div *ngIf="pestanaActual === 'guardado'">
+        </div> 
+      </div>
+    </ng-template>

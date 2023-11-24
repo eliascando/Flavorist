@@ -1,0 +1,247 @@
+.perfil-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(230, 230, 230);
+    padding: 20px;
+  }
+
+  .perfil-container, .perfil-container * {
+    font-family: 'Poppins', sans-serif;
+}
+  
+  .barra-superior {
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo {
+    width: 50px; /* Ajusta el tamaño del logo según sea necesario */
+    height: auto;
+  }  
+
+  .noti {
+    width: 50px; 
+    height: auto;
+  }  
+
+  .inicio-button {
+    background-color: #FF3911;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .perfil-info {
+    margin-top: 70px;
+    text-align: center;
+  }
+  
+  .perfil-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+
+  .perfil-info button {
+    background-color: #c7c7c7;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 0.2cm; 
+    font-weight: bold;
+  }
+
+  .formulario-edicion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .formulario-edicion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  
+    /* Estilo para los campos de nombre y apellido en una fila de dos */
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  
+    .nombre-apellido-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    
+  
+    input[type="text"] {
+      width: calc(50% - 5px);
+      box-sizing: border-box;
+    }
+  
+    /* Estilo para los botones */
+    button {
+      background-color: #FF3911;
+      color: white;
+      padding: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  
+    /* Centrar los botones */
+    .botones-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  
+  
+  .pestaña-creado {
+    margin-top: 30px;
+  }
+
+  .fotos-creadas-container {
+    display: flex;
+    flex-wrap: wrap; /* Permitir que las imágenes se envuelvan en múltiples líneas */
+    justify-content: space-around; /* Distribuir el espacio alrededor de las imágenes */
+  }
+  
+  .foto-creada {
+    width: calc(16.666% - 10px); /* 16.666% asegura 6 columnas, y restamos el espacio entre las imágenes */
+    height: auto; /* Mantendrá la proporción original de la imagen */
+    border-radius: 10px; /* Puntas redondeadas */
+    margin: 5px; /* Espacio entre las imágenes */
+    object-fit: cover; /* Asegura que la imagen cubra completamente el área sin distorsionarse */
+  }
+
+  .pestaña-guardado {
+    margin-top: 30px;
+  }
+
+  .pestañas-container {
+    display: flex;
+  }
+  
+  .pestaña-creado,
+  .pestaña-guardado {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    background-color: transparent; /* Fondo inicial transparente */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color de fondo */
+  }
+  
+  .pestaña-creado h2,
+  .pestaña-guardado h2 {
+    margin: 0;
+    padding: 10px;
+    color: black; /* Color de texto inicial */
+  }
+  
+  .pestaña-creado:hover,
+  .pestaña-guardado:hover {
+    background-color: #FF3911; /* Cambia el color de fondo al pasar el ratón sobre las pestañas */
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .pestaña-creado.selected,
+  .pestaña-guardado.selected {
+    background-color: #FF3911; /* Cambia el color de fondo cuando la pestaña está seleccionada */
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .pestaña-creado.selected h2,
+  .pestaña-guardado.selected h2 {
+    color: white; /* Cambia el color del texto cuando la pestaña está seleccionada */
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .contenido-pestaña {
+    margin-top: 5%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+
+
+  .formulario-edicion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    margin: 20px auto;
+    margin-top: 5%;
+}
+
+.formulario-edicion label {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.formulario-edicion input[type="text"],
+.formulario-edicion input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.botones-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.botones-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.botones-container button:nth-child(1) {
+    background-color: #FF3911; /* Color principal */
+    color: white;
+}
+
+.botones-container button:nth-child(2) {
+    background-color: #c7c7c7; /* Color para cancelar */
+    color: black;
+}
+
+@media screen and (max-width: 600px) {
+    .formulario-edicion {
+        width: 100%;
+        padding: 15px;
+        margin: 10px auto;
+    }
+}

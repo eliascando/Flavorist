@@ -1,9 +1,9 @@
 <nav class="top-nav">
     <img src="../../../../assets/logo-small.svg" alt="Logo" class="logo" id="logo">
     <div class="navbar-buttons">
-        <a routerLink="./home">Inicio</a> 
-        <a routerLink="./explorer">Explorar</a>
-        <a routerLink="./post-creation">Crear</a>
+        <a routerLink="./home" class="item">Inicio</a> 
+        <a routerLink="./explorer" class="item">Explorar</a>
+        <a routerLink="./post-creation" class="item">Crear</a>
     </div>
 
     <input type="search" placeholder="Buscar">
@@ -12,6 +12,6 @@
     <a routerLink="./profile"><img src="../../../assets/perfildefault.webp" alt="Perfil" class="profile-pic"></a>   
     <a routerLink="./configuration"><img src="../../../assets/configuracion.svg" alt="configuracion" class="notification-icon"></a>
 
-    <button (click)="cerrarSesion()">Cerrar Sesión</button>
+    <button (click)="cerrarSesion()" class="item">Cerrar Sesión</button>
 
 </nav>
