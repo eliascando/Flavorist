@@ -8,10 +8,28 @@
 
     <input type="search" placeholder="Buscar">
     
-    <a routerLink="./notification"><img src="../../../assets/notificacion.svg" alt="Notificaciones" class="notification-icon"></a>
+    <a (click)="mostrarNotificacion()"
+        style="
+            cursor: pointer;
+        "
+
+    ><img src="../../../assets/notificacion.svg" alt="Notificaciones" class="notification-icon"></a>
     <a routerLink="./profile"><img src="../../../assets/perfildefault.webp" alt="Perfil" class="profile-pic"></a>   
     <a routerLink="./configuration"><img src="../../../assets/configuracion.svg" alt="configuracion" class="notification-icon"></a>
 
     <button (click)="cerrarSesion()">Cerrar Sesión</button>
 
 </nav>
+
+<div id="notifications" [ngClass]="noti ? 'showNoti' : 'hideNoti'">
+    <div>
+        <h1>Notificaciones</h1>
+        <div class="noti-container" *ngFor="let noti of notificaciones">
+            <div class="noti">
+                <img [src]="noti.imagen" alt="Perfil" class="profile-pic">
+                <p>{{noti.descripcion}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

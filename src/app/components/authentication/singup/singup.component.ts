@@ -11,7 +11,7 @@ export class SingupComponent {
   constructor(private authComponent: AuthenticationComponent) { }
 
   public setVolver(): void {
-    console.log('Volver');
+    //console.log('Volver');
     this.authComponent.singup = false;
   }
 
