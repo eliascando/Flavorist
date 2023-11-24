@@ -13,7 +13,7 @@ export class AuthenticationComponent {
     @Input() singup: boolean;
 
     public isLogged(): boolean {
-      console.log(this.authService.isLogged());
+      //console.log(this.authService.isLogged());
       return this.authService.isLogged();
     }
 }
