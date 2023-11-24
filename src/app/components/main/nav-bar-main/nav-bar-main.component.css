@@ -1,0 +1,60 @@
+/* feed-principal.component.css */
+.top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 0.5%;
+}
+
+#logo {
+    height: 50px;
+    margin: 0 5px; /* Margen reducido */
+}
+
+input[type="search"] {
+    font-family: 'Poppins', sans-serif; /* Agrega la fuente Poppins */
+    flex-grow: 1; /* Barra de búsqueda más grande */
+    padding: 0.9%;
+    margin: 0 15px;
+    border-radius: 25px;
+    border: #e9e9e9;
+    background-color: #e9e9e9;
+}
+
+.notification-icon {
+    height: 20px;
+    margin: 0 10px;
+}
+
+.profile-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.nav-buttons {
+    display: flex;
+}
+
+.item {
+    margin-right: 15px;
+    text-decoration: none;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.item:hover {
+    background-color: #000000;
+    color: white;
+}
+
+.item.active {
+    background-color: black;
+    color: white;
+}

@@ -1,0 +1,229 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start; /* Alineación al inicio para permitir el efecto escalonado */
+  }
+  
+  .image-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .image-column:nth-child(odd) {
+    margin-top: 75px; /* Margen para las columnas impares */
+  }
+  
+  .image-rect {
+    width: 220px; /* Ajusta el tamaño según tus necesidades */
+    height: 320px;
+    margin: 10px;
+    border-radius: 20px; /* Bordes ligeramente redondeados */
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Máscara de recorte vertical */
+  }
+  
+  .overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Efecto oscuro */
+    mix-blend-mode: multiply;
+  }
+  
+  .navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FCFBF7;
+  }
+  
+  .logo {
+    height: 60px;
+    margin-left: 50px; 
+  }
+  
+  .navbar-buttons{
+    margin-right: 50px;
+  
+  }
+  
+  .navbar-buttons button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    margin-right: 15px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+  }
+  
+  .navbar-buttons button:hover {
+    opacity: 0.8; /* Efecto al pasar el ratón */
+    cursor: pointer; /* Puntero de manito */
+  }
+  
+  /* Estilo específico para el botón Iniciar Sesión */
+  .navbar-buttons button:first-child {
+    background-color: #FF3911; /* Color rojo para Iniciar Sesión */
+    color: white; /* Texto blanco para mayor contraste */
+  }
+  
+  /* Estilo específico para el botón Registrar */
+  .navbar-buttons button:last-child {
+    background-color: #E9E9E9; /* Color gris para Registrar */
+    color: black; /* Texto negro para mayor contraste */
+  }
+  
+  
+  .form-container {
+    position: absolute;
+    right: 150px; /* Ajusta según sea necesario */
+    top: 50%; /* Centrar verticalmente */
+    transform: translateY(-50%);
+    background: white;
+    padding: 10px;
+    border-radius: 20px; /* Puntas ligeramente redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    width: 400px; /* Ajusta según sea necesario */
+    height: 600px;
+  }
+  
+  .form-logo {
+    display: block;
+    margin: 0 auto;
+    width: 50px;
+    /* Ajusta el tamaño según sea necesario */
+  }
+  
+  /* TITULO */
+  h2 {
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+  }
+  
+  .rounded-input {
+    display: block;
+    width: 70%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 15px; /* Bordes redondeados */
+    border: 1px solid #ccc;
+  }
+  
+  .continue-btn {
+    background-color: #FF3911;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 70%;
+    height: 38px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  
+  .or-separator {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .google-btn {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 70%;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .google-btn img {
+    margin-right: 10px;
+    width: 20px;
+    /* Ajusta el tamaño según sea necesario */
+  }
+  
+  .member-question {
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px; /* Ajusta esto según sea necesario */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+    background: white; /* Fondo blanco para el formulario */
+    border-radius: 20px; /* Bordes redondeados */
+    text-align: center;
+  }
+  
+  .form-logo {
+    width: 50px; /* Ajusta el tamaño del logo según sea necesario */
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    text-align: left;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .rounded-input {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .continue-btn, .google-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px; /* Espacio entre botones */
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .or-separator {
+    margin: 20px 0;
+  }
+  
+  .member-question {
+    font-size: 0.8em;
+  }
+  
+  
+  
+  
+  

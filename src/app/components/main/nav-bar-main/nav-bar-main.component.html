@@ -1,11 +1,17 @@
-<nav class="navbar">
-    <img src="" alt="Logo" class="logo">
+<nav class="top-nav">
+    <img src="../../../../assets/logo-small.svg" alt="Logo" class="logo" id="logo">
     <div class="navbar-buttons">
-        <button routerLink="./home">Inicio</button>
-        <button routerLink="./profile">Perfil</button>
-        <button routerLink="./notification">Notificaciones</button>
-        <button routerLink="./explorer">Explorar</button>
-        <button routerLink="./configuration">Configuración</button>
-        <button (click)="cerrarSesion()">Cerrar Sesión</button>
+        <a routerLink="./home">Inicio</a> 
+        <a routerLink="./explorer">Explorar</a>
+        <a routerLink="./post-creation">Crear</a>
     </div>
+
+    <input type="search" placeholder="Buscar">
+    
+    <a routerLink="./notification"><img src="../../../assets/notificacion.svg" alt="Notificaciones" class="notification-icon"></a>
+    <a routerLink="./profile"><img src="../../../assets/perfildefault.webp" alt="Perfil" class="profile-pic"></a>   
+    <a routerLink="./configuration"><img src="../../../assets/configuracion.svg" alt="configuracion" class="notification-icon"></a>
+
+    <button (click)="cerrarSesion()">Cerrar Sesión</button>
+
 </nav>
