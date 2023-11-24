@@ -1,18 +1,11 @@
-import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-@Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+@Injectable({
+  providedIn: 'root'
 })
-export class HomeComponent {
+export class PostServiceService {
 
-  constructor() { }
-
-
-  private entro: boolean = false;
-
-  public posts: any[] = [
+  private posts: any[] = [
     {
       id: 1,
       titulo: 'Post 1',
@@ -85,13 +78,10 @@ export class HomeComponent {
     }
   ];
 
-  showOptions(post: any) {
-    post.showOptions = true;
-  }
+  constructor() { }
 
-  hideOptions(post: any) {
-      post.showOptions = false;
+  getPostById(id: number) {
+    return this.posts.find(post => post.id === id);
   }
-
 
 }

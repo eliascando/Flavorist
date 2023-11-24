@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class NavBarMainComponent {
 
   public noti : boolean = false;
+  public confi : boolean = false;
 
   public notificaciones: any[] = [
     {
@@ -38,6 +39,7 @@ export class NavBarMainComponent {
     }
   ];
 
+
   constructor(private route: Router) { }
 
   public cerrarSesion(): void {
@@ -49,4 +51,9 @@ export class NavBarMainComponent {
     this.noti = !this.noti;
     //console.log("muestra notifaciones",this.noti);
   }
+
+  public mostrarConfiguracion(): void {
+    this.confi = !this.confi;
+  }
+
 }

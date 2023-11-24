@@ -35,7 +35,7 @@
     object-position: center;
     border-radius: 10px;
     cursor: pointer;
-    background-color: rgba(58, 50, 46, 0.5); /* Transparencia roja */
+    background-color: rgba(56, 56, 56, 0.5); /* Transparencia roja */
     z-index: 1000;
     display: none; /* Opcional: ocultar por defecto y mostrar en hover */
 }
@@ -51,4 +51,15 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
     grid-auto-rows: auto;
+}
+
+.op-like {
+    background-color: #e92222; /* Color de fondo verde */
+    color: white; /* Texto en blanco */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de mano al pasar el ratón */
+    font-size: 16px; /* Tamaño de la fuente */
+    transition: background-color 0.2s; /* Transición suave al cambiar de color */
 }

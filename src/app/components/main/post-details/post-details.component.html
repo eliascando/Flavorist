@@ -1,0 +1,28 @@
+
+
+<div class="post-container" *ngIf="post">
+    <div class="post-content">
+        <div class="post-image-container">
+            <img [src]="post.imagen" alt="Imagen del post">
+        </div>
+        <div class="post-info">
+            <div class="post-details">
+                <h2 class="post-title">{{ post.titulo }}</h2>
+                <p class="post-description">{{ post.descripcion }}</p>
+            </div>
+            <div class="comments-container">
+                <input [(ngModel)]="nuevoComentario" placeholder="Agrega un comentario..." class="comment-input">
+                <button (click)="agregarComentario()" class="comment-button">Comentar</button>
+                <div *ngFor="let comentario of post.comentario" class="comment">
+                    {{ comentario }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!post" class="no-post">
+    <p>Post no encontrado.</p>
+</div>
+
+
+

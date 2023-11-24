@@ -57,26 +57,7 @@ body, html {
     height: 60px;
     margin-left: 50px; 
   }
-  
-  .navbar-buttons{
-    margin-right: 50px;
-  
-  }
-  
-  .navbar-buttons button {
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    margin-right: 15px;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 15px; /* Bordes redondeados */
-    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
-  }
-  
-  .navbar-buttons button:hover {
-    opacity: 0.8; /* Efecto al pasar el ratón */
-    cursor: pointer; /* Puntero de manito */
-  }
+
   
   /* Estilo específico para el botón Iniciar Sesión */
   .navbar-buttons button:first-child {
@@ -93,15 +74,15 @@ body, html {
   
   .form-container {
     position: absolute;
-    right: 150px; /* Ajusta según sea necesario */
+    right: 50px; /* Ajusta según sea necesario */
     top: 50%; /* Centrar verticalmente */
     transform: translateY(-50%);
     background: white;
     padding: 10px;
     border-radius: 20px; /* Puntas ligeramente redondeadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-    width: 400px; /* Ajusta según sea necesario */
-    height: 600px;
+    width: 40%; /* Ajusta según sea necesario */
+    height: 60%;
   }
   
   .form-logo {
@@ -119,14 +100,7 @@ body, html {
     font-weight: bold;
   }
   
-  .rounded-input {
-    display: block;
-    width: 70%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 15px; /* Bordes redondeados */
-    border: 1px solid #ccc;
-  }
+  
   
   .continue-btn {
     background-color: #FF3911;
@@ -199,10 +173,9 @@ body, html {
   
   .rounded-input {
     display: block;
-    width: 100%;
-    max-width: 350px;
+    max-width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
   }
@@ -216,7 +189,7 @@ body, html {
   }
   
   .or-separator {
-    margin: 20px 0;
+    margin: 10px 0;
   }
   
   .member-question {

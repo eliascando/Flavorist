@@ -2,7 +2,7 @@
     <img src="../../../../assets/logo-small.svg" alt="Logo" class="logo" id="logo">
     <div class="navbar-buttons">
         <a routerLink="./home" class="item">Inicio</a> 
-        <a routerLink="./home" class="item">Explorar</a>
+        <a routerLink="./explorer" class="item">Explorar</a>
         <a routerLink="./post-creation" class="item">Crear</a>
     </div>
 
@@ -14,10 +14,12 @@
         "
 
     ><img src="../../../assets/notificacion.svg" alt="Notificaciones" class="notification-icon"></a>
-    <a routerLink="./profile"><img src="../../../assets/perfildefault.webp" alt="Perfil" class="profile-pic"></a>   
-    <a routerLink="./configuration"><img src="../../../assets/configuracion.svg" alt="configuracion" class="notification-icon"></a>
 
-    <button (click)="cerrarSesion()" class="item">Cerrar Sesión</button>
+    <a routerLink="./profile"><img src="../../../assets/perfildefault.webp" alt="Perfil" class="profile-pic"></a>   
+
+    <a (click)="mostrarConfiguracion()" style="cursor: pointer;">
+        <img src="../../../assets/configuracion.svg" alt="configuracion" class="notification-icon">
+    </a>
 
 </nav>
 
@@ -31,5 +33,11 @@
             </div>
         </div>
     </div>
+</div>
 
+<div id="configuracion" [ngClass]="confi ? 'showConfi' : 'hideConfi'">
+    <div>
+        <h1>Configuración</h1>
+        <button (click)="cerrarSesion()" class="item">Cerrar Sesión</button>
+    </div>
 </div>

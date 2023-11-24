@@ -1,10 +1,20 @@
 <div class="grid-container">
-    <div *ngFor="let post of posts" class="post" (mouseenter)="showOptions(post)" (mouseleave)="hideOptions(post)">
+    <div *ngFor="let post of posts" class="post" 
+         (mouseenter)="showOptions(post)" 
+         (mouseleave)="hideOptions(post)">
+
         <img [src]="post.imagen" alt="Post image">
-        <div class="options" [ngClass]="post.showOptions ? 'visible' : 'hidden'">
-            <button class="op-like">
-                Like
-            </button>
-        </div>
+
+        <!-- Enlace que envuelve el div de opciones -->
+        <a [routerLink]="['/post-details', post.id]">
+            <div class="options" [ngClass]="post.showOptions ? 'visible' : 'hidden'">
+                <button class="op-like">
+                    Like
+                </button>
+                <!-- Puedes agregar más botones u opciones aquí -->
+            </div>
+        </a>
     </div>
 </div>
+
+
