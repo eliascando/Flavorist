@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-authentication',
@@ -7,7 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 export class AuthenticationComponent {
   
-    constructor() { }
+    constructor(private authService: AuthenticationService) { }
     
     @Input() singup: boolean;
+
+    public isLogged(): boolean {
+      console.log(this.authService.isLogged());
+      return this.authService.isLogged();
+    }
 }

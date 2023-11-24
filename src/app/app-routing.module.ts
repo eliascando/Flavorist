@@ -16,19 +16,15 @@ const routes: Routes = [
     path: '', redirectTo: '/auth', pathMatch: 'full'
   },
   { 
-    path: 'auth', component: AuthenticationComponent,
+    path: 'auth', component: AuthenticationComponent
   },
-  { 
-    path: 'main', component: MainComponent,
-    children: [
-      { path: 'home', component: HomeComponent },
-      { path: 'explorer', component: ExplorerComponent },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'notification', component: NotificationComponent },
-      { path: 'post-creation', component: PostCreationComponent },
-      { path: 'configuration', component: ConfigurationComponent}
-    ]
-  }
+
+  { path: 'home', component: HomeComponent },
+  { path: 'explorer', component: ExplorerComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'notification', component: NotificationComponent },
+  { path: 'post-creation', component: PostCreationComponent },
+  { path: 'configuration', component: ConfigurationComponent }
 ];
 
 @NgModule({

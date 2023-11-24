@@ -1,2 +1,4 @@
-<app-authentication *ngIf="!isLogged()"></app-authentication>
-<app-main *ngIf="isLogged()"></app-main>
+<div id="app">
+    <app-authentication *ngIf="!isLogged()"></app-authentication>
+    <app-main *ngIf="isLogged()"></app-main>
+</div>

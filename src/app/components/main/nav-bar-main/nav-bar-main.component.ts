@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar-main',
@@ -7,10 +8,10 @@ import { Component } from '@angular/core';
 })
 export class NavBarMainComponent {
 
-  constructor() { }
+  constructor(private route: Router) { }
 
   public cerrarSesion(): void {
     window.localStorage.removeItem('user');
-    window.location.reload();
+    this.route.navigateByUrl('/auth');
   }
 }

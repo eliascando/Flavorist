@@ -40,7 +40,7 @@ export class SinginComponent {
     console.log(this.sesion);
 
     if(this.authService.login(this.sesion as LoginRequest)) {
-      this.router.navigateByUrl('/main/home');
+      this.router.navigateByUrl('/home');
     } else {
       alert('Usuario o contraseña incorrectos');
     }

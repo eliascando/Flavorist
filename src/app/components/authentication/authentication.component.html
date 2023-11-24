@@ -1,2 +1,4 @@
-<app-singin *ngIf="!singup"></app-singin>
-<app-singup *ngIf="singup"></app-singup>
+<div id="auth" *ngIf="!isLogged()">
+    <app-singin *ngIf="!singup"></app-singin>
+    <app-singup *ngIf="singup"></app-singup>
+</div>
