@@ -1,27 +1,42 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { LoginRequest } from "../interfaces/loginRequest";
+import { ILoginRequest } from "../interfaces/ILoginRequest";
+import { ILoginResult } from "../interfaces/ILoginResult";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: "root"
 })
 export class AuthenticationService {
+
+    private user: ILoginResult = {
+        Id: '',
+        NombresCompletos: '',
+        Correo: '',
+        UsuarioTipo: '',
+        FechaLogin: new Date(),
+        Token: '',
+    }
+
     constructor(private http: HttpClient) { }
 
 
 
-    public login(obj: LoginRequest): boolean {
-        if(obj.email === 'pepito@correo.com' && obj.password === '123456') {
-            window.localStorage.setItem(
-                'user',
-                JSON.stringify({
-                    email: obj.email,
-                    password: obj.password
-                })
-            )
-            return true;
-        } else {
-            return false;
+    public async login(obj: ILoginRequest): Promise<boolean> {
+        try {
+            const res: any = await this.http.post(environment.API_URL + 'api/login', obj).toPromise();
+    
+            console.log(res);
+            if (res) {
+                this.user = res;
+                window.localStorage.setItem('user', JSON.stringify(this.user));
+                return true; // Retorna true directamente si el login es exitoso
+            } else {
+                return false; // Retorna false si la respuesta no es exitosa
+            }
+        } catch (err) {
+            console.error(err);
+            return false; // Retorna false en caso de error
         }
     }
 

@@ -19,6 +19,7 @@ export class ProfileComponent {
    usuario: string = 'nombre_usuario';
    mostrarFormulario: boolean = false;
    
+   nombresCompletos: string = '';
  
    // Propiedades para el formulario de edición
    nuevoNombre: string = '';
@@ -26,6 +27,15 @@ export class ProfileComponent {
    nuevoUsuario: string = '';
    nuevaFoto: File | null = null;
 
+   ngOnInit(): void {
+    const user = window.localStorage.getItem('user');
+    console.log(user);
+    if (user) {
+      const userObj = JSON.parse(user);
+      console.log(userObj);
+      this.nombresCompletos = userObj.nombresCompletos;
+    }
+  }
    
    abrirFormularioEdicion(): void {
      this.mostrarFormulario = true;

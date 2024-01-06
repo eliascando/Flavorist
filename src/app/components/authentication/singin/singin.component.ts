@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginRequest } from 'src/app/interfaces/loginRequest';
+import { ILoginRequest } from 'src/app/interfaces/ILoginRequest';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AuthenticationComponent } from '../authentication.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-singin',
@@ -15,8 +16,8 @@ export class SinginComponent {
   public form: any;
   // public servicio: AuthService;
   public sesion: any = {
-    email : 'pepito@correo-com',
-    password : '123456'
+    correo : '',
+    password : ''
   }
 
   ngOnInit(): void {
@@ -27,19 +28,21 @@ export class SinginComponent {
     this.authComponent.singup = true;
   }
 
-  public iniciarSesion(): void {
+  public async iniciarSesion(){
     if(this.form.invalid) {
       alert('Formulario invalido');
       return;
     }
-    const email = this.form.get('email').value;
+    const correo = this.form.get('email').value;
     const password = this.form.get('password').value;
     
-    this.sesion.email = email;
+    this.sesion.correo = correo;
     this.sesion.password = password;
     console.log(this.sesion);
-
-    if(this.authService.login(this.sesion as LoginRequest)) {
+    let response = this.authService.login(this.sesion as ILoginRequest);
+    console.log(response);
+    if(response) {
+      console.log('Usuario logueado', response);
       this.router.navigateByUrl('/home');
     } else {
       alert('Usuario o contraseña incorrectos');
