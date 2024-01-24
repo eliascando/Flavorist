@@ -34,6 +34,9 @@ import { ProfileComponent } from './components/main/profile/profile.component';
 import { NavBarMainComponent } from './components/main/nav-bar-main/nav-bar-main.component';
 import { CommonModule } from '@angular/common';
 import { PostDetailsComponent } from './components/main/post-details/post-details.component';
+import { AuthenticationService } from './services/authentication.service';
+import { PostServiceService } from './services/post-service.service';
+import { CatalogService } from './services/catalog.service';
 
 @NgModule({
   declarations: [
@@ -77,7 +80,7 @@ import { PostDetailsComponent } from './components/main/post-details/post-detail
     MatSnackBarModule,
     CommonModule
   ],
-  providers: [],
+  providers: [AuthenticationService, PostServiceService, CatalogService],
   bootstrap: [AppComponent, Router]
 })
 export class AppModule { }

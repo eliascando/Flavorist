@@ -28,7 +28,7 @@ export class AuthenticationService {
     
             console.log(res);
             if (res) {
-                this.user = res;
+                this.user = res as ILoginResult;
                 window.localStorage.setItem('user', JSON.stringify(this.user));
                 return true; // Retorna true directamente si el login es exitoso
             } else {
@@ -42,5 +42,25 @@ export class AuthenticationService {
 
     public isLogged(): boolean {
         return window.localStorage.getItem('user') !== null;
+    }
+
+    public getUserId(): string {
+        let storage =  window.localStorage.getItem('user');
+        console.log(storage);
+        if(!storage){
+            return '';
+        }
+        let user  = JSON.parse(storage);
+        return user.id;
+    }
+
+    public getUserToken(): string {
+        let storage =  window.localStorage.getItem('user');
+        console.log(storage);
+        if(!storage){
+            return '';
+        }
+        let user  = JSON.parse(storage);
+        return user.token;
     }
 }

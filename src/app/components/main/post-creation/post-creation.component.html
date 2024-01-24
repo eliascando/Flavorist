@@ -32,11 +32,8 @@
         
               <div class="input-field">
                 <label for="category">Categoría:</label>
-                <select id="category" name="category" ngModel>
-                  <option value="Vegana">Vegana</option>
-                  <option value="Postres">Postre</option>
-                  <option value="sin Lacteos">Sin Lacteo</option>
-                  <option value="Sin Gluten">Sin Gluten</option>
+                <select id="categoryIngrient" name="categoryIngredient">
+                  <option *ngFor="let categoria of ingredienteCategoria" [value]="categoria.id">{{categoria.nombre}}</option>
                 </select>
               </div>
         
