@@ -83,3 +83,25 @@
     }
   }
   
+  .listaPasos{
+    cursor: grab;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .trash-icon{
+    cursor: pointer;
+  }
+
+  .trash-icon:hover{
+    color: red;
+  }
+  
+  .imagenSeleccionada{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+  }

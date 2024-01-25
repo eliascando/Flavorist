@@ -22,6 +22,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatStepperModule} from '@angular/material/stepper';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { SingupComponent } from './components/authentication/singup/singup.component';
@@ -78,6 +80,8 @@ import { CatalogService } from './services/catalog.service';
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
+    MatStepperModule,
+    DragDropModule,
     CommonModule
   ],
   providers: [AuthenticationService, PostServiceService, CatalogService],

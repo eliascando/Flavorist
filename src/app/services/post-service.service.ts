@@ -32,4 +32,25 @@ export class PostServiceService {
       throw err;
     }
   }
+
+  public async savePost(post: any): Promise<any>{
+    try{
+      let userId = this.authService.getUserId();
+      let headers = {
+        'Authorization': 'Bearer ' + this.authService.getUserToken()
+      }
+      post.usuarioID = userId;
+      let body: any = post;
+      let res: any = await this.http.post(environment.API_URL + 'api/post/', body, {headers: headers}).toPromise();
+
+      console.log('Respuesta de save post: ',res);
+      
+      if(res){
+        return res;
+      }
+    }catch(err){
+      console.error(err);
+      throw err;
+    }
+  }
 }

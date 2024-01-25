@@ -1,75 +1,153 @@
-<div class="form-container">
-    <form #recipeForm="ngForm" (ngSubmit)="submitForm()">
-      <div class="form-content">
-  
-        <!-- Área de carga de archivos a la izquierda -->
-        <div class="upload-container">
-          <input type="file" id="photo" name="photo" ngModel hidden (change)="onFileSelect($event)" #fileInput>
-          <div class="upload-area" (click)="fileInput.click()">
-            <i class="upload-icon">📤</i>
-            <p>Elige un archivo o arrástralo y suéltalo aquí</p>
-            <small>Se recomienda usar archivos jpg de alta calidad de menos de 20MB o archivos mp4 que tengan menos de 200MB.</small>
-          </div>
-          <button type="button" (click)="fileInput.click()">Cargar foto</button>
-        </div>
-  
-        <!-- Resto de campos del formulario a la derecha -->
-        <div class="fields-container">
-            <div class="input-field">
-                <label for="title">Título:</label>
-                <input type="text" id="title" name="title" ngModel placeholder="Añade un título">
-              </div>
-        
-              <div class="input-field">
-                <label for="description">Descripción:</label>
-                <textarea id="description" name="description" ngModel rows="4" placeholder="Añade una descripción detallada"></textarea>
-              </div>
-        
-              <div class="input-field">
-                <label for="prepTime">Tiempo de Preparación:</label>
-                <input type="text" id="prepTime" name="prepTime" ngModel placeholder="Tiempo estimado en minutos">
-              </div>
-        
-              <div class="input-field">
-                <label for="category">Categoría:</label>
-                <select id="categoryIngrient" name="categoryIngredient">
-                  <option *ngFor="let categoria of ingredienteCategoria" [value]="categoria.id">{{categoria.nombre}}</option>
-                </select>
-              </div>
-        
-              <div class="input-field">
-                <label for="steps">Pasos:</label>
-                <input type="number" id="steps" name="steps" ngModel placeholder="Número de pasos">
-              </div>
-        
-              <div class="input-field">
-                <label for="ingredients">Lista de Ingredientes:</label>
-                <textarea id="ingredients" name="ingredients" ngModel rows="4" placeholder="Ingredientes separados por comas"></textarea>
-              </div>
-        
-              <div class="input-field">
-                <label for="difficulty">Dificultad:</label>
-                <select id="difficulty" name="difficulty" ngModel>
-                  <option value="baja">Baja</option>
-                  <option value="media">Media</option>
-                  <option value="alta">Alta</option>
-                </select>
-              </div>
-        
-              <div class="input-field">
-                <label for="servings">Porciones:</label>
-                <input type="number" id="servings" name="servings" ngModel placeholder="Número de porciones">
-              </div>
-        
-              <div class="input-field">
-                <label for="cost">Costo:</label>
-                <input type="text" id="cost" name="cost" ngModel placeholder="Costo estimado de ingredientes">
-              </div>
-        
-              <button type="submit" class="submit-button">Crear Receta</button>
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <!-- Step 1: Datos Iniciales -->
+  <mat-step [stepControl]="firstFormGroup">
+    <form 
+      [formGroup]="firstFormGroup"
+    >
+      <ng-template matStepLabel>Datos Iniciales</ng-template>
+      <div class="upload-container">
+        <img *ngIf="firstFormGroup.get('imagen')?.value" [src]="firstFormGroup.get('imagen')?.value" alt="Imagen seleccionada" class="imagenSeleccionada">
+        <!-- <input type="file" id="photo" hidden (change)="onFileSelect($event)" #fileInput> -->
+        <input type="file" id="photo" hidden (change)="onFileSelect($event)" #fileInput>
+        <!-- <div class="upload-area" (click)="fileInput.click()">
+          <i class="upload-icon">📤</i>
+          <p>Elige un archivo o arrástralo y suéltalo aquí</p>
+          <small>Se recomienda usar archivos jpg de alta calidad de menos de 20MB o archivos mp4 que tengan menos de 200MB.</small>
+        </div> -->
+        <button type="button" (click)="fileInput.click()">Cargar foto</button>
+      </div>
+      <br/>
+      <div class="fields-container">
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" required>
+        </mat-form-field>
 
-        </div>
-  
+        <mat-form-field>
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="descripcion" required >
+          </textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Tiempo de Preparación (minutos)</mat-label>
+          <input matInput formControlName="tiempoPreparacion" required type="number">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Porciones</mat-label>
+          <input matInput formControlName="porciones" required type="number">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Costo ($)</mat-label>
+          <input matInput formControlName="costo" requird type="number">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Dificultad</mat-label>
+          <mat-select formControlName="dificultad" required>
+            <mat-option *ngFor="let dificultad of recetaDificultad" [value]="dificultad.id">
+              {{dificultad.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="categoriaReceta" required>
+            <mat-option *ngFor="let categoria of recetaCategoria" [value]="categoria.id">
+              {{categoria.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </form>
-  </div>
+  </mat-step>
+
+  <!-- Step 2: Ingredientes de la receta -->
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Ingredientes de la Receta</ng-template>
+      <!-- <div>
+        <div *ngFor="let ingrediente of ingredientes" cdkDrag class="listaIngredientes">{{ingrediente}}</div>
+      </div> -->
+    <div class="fields-container">
+      <!--mostrar ingredientes ingresados--> 
+      <div *ngFor="let ingrediente of ingredientes; let index = index" cdkDrag class="listaIngredientes">
+        {{ingrediente.nombre}} - {{ingrediente.cantidad}}
+        <i class="fas fa-trash-alt trash-icon"
+          (click)="removeItem(index)"
+        ></i>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombreIngrediente" requird type="string">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cantidad</mat-label>
+        <input matInput formControlName="cantidadIngrediente" requird type="number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Unidad de Medida</mat-label>
+        <mat-select formControlName="unidadMedidaIngrediente" required>
+          <mat-option *ngFor="let um of unidadMedia" [value]="um.id">
+            {{um.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="categoriaIngrediente" required>
+          <mat-option *ngFor="let categoria of ingredienteCategoria" [value]="categoria.id">
+            {{categoria.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <input type="submit" 
+        (click)="addIngrediente()"
+        value="Añadir Ingrediente"
+      >
+    </div>
+
+    <!-- <button (click)="">Añadir Ingrediente</button> -->
+      
+      <!-- Campos para el título, descripción, tiempo de preparación, etc. -->
+    </form>
+  </mat-step>
+
+  <!-- Step 3: Pasos de la receta -->
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Pasos de la receta</ng-template>
+      <div cdkDropList (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let paso of pasos; let index = index" cdkDrag class="listaPasos">
+          {{paso.descripcion}} <i class="fas fa-trash-alt trash-icon"
+            (click)="removeItem(index)"
+          ></i>
+        </div>
+      </div>
+      
+      <!-- Formulario para añadir nuevos elementos -->
+      <mat-form-field>
+        <mat-label>Agrega un nuevo paso</mat-label>
+        <input 
+          #newItemInput 
+          type="string" 
+          required 
+          matInput 
+          style="width: 100%"
+        >
+      </mat-form-field>
+      <button (click)="addItem(newItemInput.value)">Añadir Paso</button>
+    </form>
+    <button (click)="guardarReceta()" class="guardarReceta">Guardar Receta</button>
+  </mat-step>
+
+  <!-- Otros pasos si son necesarios -->
+
+</mat-stepper>
