@@ -25,6 +25,20 @@
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     align-items: stretch; /* Asegura que los hijos se estiren para llenar el contenedor */
 }
+.pasos-container {
+    display: flex;
+    max-width: 80vw;
+    min-width: 80vw;
+    min-height: 200px; /* Establece un mínimo de altura para el contenedor */
+    max-height: 100vh;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    align-items: stretch; /* Asegura que los hijos se estiren para llenar el contenedor */
+}
 
 .post-content {
     display: flex;
