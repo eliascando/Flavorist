@@ -72,6 +72,7 @@ export class PostDetailsComponent implements OnInit {
     this.tieneLike = this.post.tieneLike;
     this.tieneGuardado = this.post.guardado;
     console.log('Post encontrado:', this.post);
+    this.post.recetaPasos = this.post.recetaPasos.sort((a: any, b: any) => a.orden - b.orden);
     this.catalogService.getRecetaCategoriaById(this.post.categoriaID).then((res) => {
       this.recetaCategoria = res.nombre;
     });
