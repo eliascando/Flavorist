@@ -1,40 +1,58 @@
 <nav class="top-nav">
     <img src="../../../../assets/logo-small.svg" alt="Logo" class="logo" id="logo">
     <div class="navbar-buttons">
-        <a routerLink="./home" class="item">Inicio</a> 
-        <a routerLink="./explorer" class="item">Explorar</a>
-        <a routerLink="./post-creation" class="item">Crear</a>
+        <a routerLink="/home" class="item">Inicio</a>
+        <a routerLink="/explorer" class="item">Explorar</a>
+        <a routerLink="/post-creation" class="item">Crear</a>
     </div>
 
     <input type="search" placeholder="Buscar">
-    
-    <a (click)="mostrarNotificacion()"
-        style="
-            cursor: pointer;
-        "
+    <div class="icons-navbar" mat-raised-button matTooltip="Notificaciones" matTooltipPosition="below">
+        <a (click)="mostrarNotificacion()" style="cursor: pointer;" [matBadge]="contadorNotificaciones"
+            matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="contadorNotificaciones === 0">
+            <i class="fas fa-bell"></i>
+            <!-- style="font-size: 1.5rem; padding-left: 1rem;" -->
+        </a>
+    </div>
 
-    ><img src="../../../assets/notificacion.svg" alt="Notificaciones" class="notification-icon"></a>
+    <div class="icons-navbar" mat-raised-button matTooltip="Perfil" matTooltipPosition="below">
+        <a routerLink="/profile/{{this.authService.getUserId()}}">
+            <i class="fas fa-user"></i>
+            <!-- style="font-size: 1.5rem; margin-right: 1rem;" -->
+        </a>
+    </div>
 
-    <a routerLink="./profile"><img src="../../../assets/perfildefault.webp" alt="Perfil" class="profile-pic"></a>   
+    <div class="icons-navbar" mat-raised-button matTooltip="Configuración" matTooltipPosition="below">
+        <a (click)="mostrarConfiguracion()">
+            <i class="fas fa-cog"></i>
+            <!-- style="font-size: 1.5rem;" -->
+        </a>
+    </div>
 
-    <a (click)="mostrarConfiguracion()" style="cursor: pointer;">
-        <img src="../../../assets/configuracion.svg" alt="configuracion" class="notification-icon">
-    </a>
 
 </nav>
 
 <div id="notifications" [ngClass]="noti ? 'showNoti' : 'hideNoti'">
+    <mat-progress-spinner *ngIf="loadingNotificaciones" mode="indeterminate"></mat-progress-spinner>
     <div>
-        <h1>Notificaciones</h1>
+        <h1 *ngIf="contadorNotificaciones !== 0">Notificaciones</h1>
         <div class="noti-container" *ngFor="let noti of notificaciones">
             <div class="noti">
-                <img [src]="noti.imagen" alt="Perfil" class="profile-pic">
-                <p>{{noti.descripcion}}</p>
+                <p>{{noti.mensaje}}</p>
+                <span>{{noti.tiempoTranscurrido}}</span>
             </div>
         </div>
+        <button *ngIf="contadorNotificaciones === 0 && !loadingNotificaciones" (click)="getNotificaciones()"
+            class="item">
+            Actualizar
+            <i class="fas fa-sync-alt"></i>
+        </button>
+        <div *ngIf="contadorNotificaciones === 0 && !loadingNotificaciones" class="no-noti">
+            <h1>No tienes notificaciones nuevas</h1>
+        </div>
     </div>
-</div>
 
+</div>
 <div id="configuracion" [ngClass]="confi ? 'showConfi' : 'hideConfi'">
     <div>
         <h1>Configuración</h1>

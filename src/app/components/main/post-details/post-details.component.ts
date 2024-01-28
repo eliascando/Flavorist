@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router  } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActionsService } from 'src/app/services/actions.service';
 import { PostServiceService } from 'src/app/services/post-service.service';
+import { LikesOwnersComponent } from './likes-owners/likes-owners.component';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { CatalogService } from 'src/app/services/catalog.service';
 
 @Component({
   selector: 'app-post-details',
@@ -8,71 +14,143 @@ import { PostServiceService } from 'src/app/services/post-service.service';
   styleUrls: ['./post-details.component.css']
 })
 export class PostDetailsComponent implements OnInit {
-  postId: number;
+  postId: string;
   post: any;
-  imagenSeleccionada: any;
   nuevoComentario: string = '';
+  cargando: boolean = false;
+  likes: number = 0;
+  tieneLike: boolean = false;
+  tieneGuardado: boolean = false;
+  cargandoLikes: boolean = false;
+  cargandoGuardado: boolean = false;
+  cargandoComentarios: boolean = false;
+  comentarios: any[] = [];
+  likesOwners: any[] = [];
+  nombreUsuario: string = '';
+  fotoUsuario: string = '';
+  idUsuarioPost: string = '';
+  recetaCategoria: string = '';
+  recetaDificultad: string = '';
 
   constructor(
     private route: ActivatedRoute,
+    private postService: PostServiceService,
+    private actionService: ActionsService,
+    public dialog: MatDialog,
+    private userService: UsuarioService,
     private router: Router,
-    private postService: PostServiceService
+    private catalogService: CatalogService
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
       if (idParam) {
-        this.postId = +idParam;
-        this.loadPostDetails(this.postId);
+        this.loadPostDetails(idParam);
       } else {
         console.error('ID del post no encontrado');
-        // Manejar la situación, por ejemplo, redirigir a otra página
       }
     });
   }
 
-  private loadPostDetails(id: number) {
-    this.post = this.postService.getPostById(id);
+  public async verLikes(): Promise<void> {
+    await this.obtenerLikesOwners();
+    const dialogRef = this.dialog.open(LikesOwnersComponent, {
+      width: '500px',
+      data: { likes: this.likesOwners }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  private async loadPostDetails(id: string) {
+    this.cargando = true;
+    this.post = await this.postService.getPostById(id);
+    this.likes = await this.contarLikes();
+    this.tieneLike = this.post.tieneLike;
+    this.tieneGuardado = this.post.guardado;
+    console.log('Post encontrado:', this.post);
+    this.catalogService.getRecetaCategoriaById(this.post.categoriaID).then((res) => {
+      this.recetaCategoria = res.nombre;
+    });
+    this.catalogService.getRecetaDificultadById(this.post.dificultadID).then((res) => {
+      this.recetaDificultad = res.nombre;
+    });
+    this.userService.getUsuarioById(this.post.usuarioID).then((res) => {
+      this.nombreUsuario = res.nombres + ' ' + res.apellidos;
+      this.fotoUsuario = res.imagen;
+      this.idUsuarioPost = res.id;
+    });
     if (this.post) {
-      // Usa la imagen del post cargado
-      this.imagenSeleccionada = { url: this.post.imagen, descripcion: this.post.descripcion || 'Descripción por defecto', comentarios: [] };
+      this.cargando = false;
     } else {
       console.error('Post no encontrado');
-      // Opción para redirigir o mostrar un mensaje
+      this.cargando = false;
     }
+    this.obtenerComentarios();
   }
 
-  cargarImagen(event: any): void {
-    const files: FileList | null = event.target.files;
-    if (files && files.length > 0) {
-      const file: File = files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagenSeleccionada = { url: reader.result, descripcion: 'Descripción por defecto', comentarios: [] };
-      };
-      reader.readAsDataURL(file);
-    }
+  async contarLikes(): Promise<number> {
+    let res: any = await this.actionService.contarLikes(this.post.id);
+    console.log('Respuesta de contar likes: ', res);
+    return res.data as number;
   }
 
-  mostrarDetalles(imagen: any): void {
-    console.log('Mostrando detalles para la imagen:', imagen);
-    console.log('URL de la imagen:', imagen.url);
-    this.imagenSeleccionada = { ...imagen, descripcion: imagen.descripcion || 'Descripción por defecto' };
+  async irAlPerfil(idUsuarioPost: string): Promise<void> {
+    console.log('Id del usuario del post: ', idUsuarioPost);
+    this.router.navigateByUrl(`/profile/${idUsuarioPost}`);
   }
 
-  agregarComentario(): void {
+
+  async agregarComentario(): Promise<void> {
     if (this.nuevoComentario.trim() !== '') {
-      if (!this.imagenSeleccionada.comentarios) {
-        this.imagenSeleccionada.comentarios = [];
-      }
-      this.imagenSeleccionada.comentarios.push(this.nuevoComentario);
+      let res = await this.actionService.comentarReceta(this.post.id, this.nuevoComentario);
+      console.log('Respuesta de comentar: ', res);
       this.nuevoComentario = '';
+      console.log('Comentarios de la imagen:', this.comentarios);
+      this.obtenerComentarios();
     }
   }
 
-  cerrarDetalles(): void {
-    this.imagenSeleccionada = null;
+  async darLike(): Promise<void> {
+    this.cargandoLikes = true;
+    if(this.tieneLike){
+      let unlike = await this.actionService.eliminarLike(this.post.id);
+      console.log('Respuesta de eliminar like: ', unlike);
+    }else{
+      console.log('Dando like a la imagen:', this.post.id);
+      let res = await this.actionService.darLikeReceta(this.post.id);
+      console.log('Respuesta de dar like: ', res);
+    }
+    this.loadPostDetails(this.post.id);
+    this.cargandoLikes = false;
+  }
+
+  async guardarPost(): Promise<void> {
+    this.cargandoGuardado = true;
+    if(this.tieneGuardado){
+      let res = await this.actionService.eliminarGuardadoReceta(this.post.id);
+      console.log('Respuesta de eliminar guardado: ', res);
+    }else{
+      let res = await this.actionService.guardarReceta(this.post.id);
+      console.log('Respuesta de guardar post: ', res);
+    }
+    this.loadPostDetails(this.post.id);
+    this.cargandoGuardado = false;
+  }
+
+  async obtenerComentarios(): Promise<void> {
+    this.cargandoComentarios = true;
+    this.comentarios = await this.actionService.getComentariosRecetas(this.post.id);
+    console.log('Comentarios: ', this.comentarios);
+    this.cargandoComentarios = false;
+  }
+
+  async obtenerLikesOwners(): Promise<void> {
+    this.likesOwners = await this.actionService.getLikesOwners(this.post.id);
+    console.log('Likes owners: ', this.likesOwners);
   }
 
 }

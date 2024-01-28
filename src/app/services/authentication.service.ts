@@ -20,8 +20,6 @@ export class AuthenticationService {
 
     constructor(private http: HttpClient) { }
 
-
-
     public async login(obj: ILoginRequest): Promise<boolean> {
         try {
             const res: any = await this.http.post(environment.API_URL + 'api/login', obj).toPromise();

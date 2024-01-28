@@ -1,9 +1,20 @@
 <div class="grid-container">
-    <div *ngFor="let post of posts" class="post" 
-    >
-        <h1>{{post.nombre}}</h1>
-        <img alt="Post image" src="data:image/jpeg;base64,{{post.imagen}}" class="post-image">
-        <span>{{post.categoria}}</span>
+    <div class="loading" *ngIf="cargando">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+
+    <div *ngFor="let post of posts" class="post" (click)="viewDetails(post)">
+
+        <img src="data:image/jpeg;base64,{{post.imagen}}" alt="Post image">
+
+        <!-- <div class="options" [ngClass]="post.showOptions ? 'showOptions' : 'hideOptions'">
+            <button class="op-like" (click)="darLike(post)">
+                Like
+            </button>
+        </div> -->
+    </div>
+    <div class="sinPost" *ngIf="sinPosts">
+        <h1>No hay posts para mostrar</h1>
     </div>
 </div>
 

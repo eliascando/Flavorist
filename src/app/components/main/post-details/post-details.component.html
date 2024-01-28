@@ -1,28 +1,81 @@
-
-
 <div class="post-container" *ngIf="post">
     <div class="post-content">
         <div class="post-image-container">
-            <img [src]="post.imagen" alt="Imagen del post">
+            <img src="data:image/jpeg;base64,{{ post.imagen }}" alt="Post image" class="post-image">
         </div>
         <div class="post-info">
             <div class="post-details">
-                <h2 class="post-title">{{ post.titulo }}</h2>
+                <h2 class="post-title">{{ post.nombre }}</h2>
                 <p class="post-description">{{ post.descripcion }}</p>
+                <span class="post-date" class="pills">{{ recetaCategoria }}</span>
+                <br/>
+                <span class="dificultad" class="pills"><mat-icon>flag</mat-icon> {{ recetaDificultad }}</span>
+                <br/>
+                <span class="tiempo-preparacion" class="pills"><mat-icon>av_timer</mat-icon> {{ post.tiempoPreparacion }} min</span>
+                <br/>
+                <p class="post-author" (click)="irAlPerfil(idUsuarioPost)">por: {{nombreUsuario}}</p>
+                <p class="post-date">{{ post.fechaCreacion | date: 'dd/MM/yyyy' }}</p>
             </div>
-            <div class="comments-container">
-                <input [(ngModel)]="nuevoComentario" placeholder="Agrega un comentario..." class="comment-input">
-                <button (click)="agregarComentario()" class="comment-button">Comentar</button>
-                <div *ngFor="let comentario of post.comentario" class="comment">
-                    {{ comentario }}
-                </div>
+            <div class="post-options">
+                <button 
+                    mat-icon-button 
+                    [color]="tieneLike ? 'warn' : 'basic'"
+                    aria-label="Icon button with a heart icon"
+                    (click)="darLike()"
+                    [disabled]="cargandoLikes"
+                >
+                    <mat-icon>favorite</mat-icon>
+                </button>
+                <p 
+                    *ngIf="likes > 0"
+                    class="likes-counter"
+                    [ngClass]="tieneLike ? 'likes-counter-liked' : 'likes-counter-unliked'"
+                    (click)="verLikes()"
+                >{{ likes }}</p>
+                <button
+                    mat-icon-button
+                    [color]="tieneGuardado ? 'accent' : 'basic'"
+                    aria-label="Icon button with a bookmark icon"
+                    (click)="guardarPost()"
+                    [disabled]="cargandoGuardado"
+                >
+                      <mat-icon>bookmark</mat-icon>
+                </button>
             </div>
         </div>
     </div>
 </div>
-<div *ngIf="!post" class="no-post">
-    <p>Post no encontrado.</p>
+<div class="pasos-container">
+    <div *ngFor="pasos">
+
+    </div>
+</div>
+<div class="comment-container" *ngIf="!cargandoComentarios">
+    <div class="comentar">
+        <input 
+            [(ngModel)]="nuevoComentario" 
+            placeholder="Agrega un comentario..." 
+            class="comment-input"
+        >
+        <button 
+            (click)="agregarComentario()"
+            mat-icon-button
+            class="comment-button"
+        >
+            <mat-icon>send</mat-icon>
+        </button>
+    </div>
+    <div class="post-comments">
+        <div *ngFor="let comentario of comentarios" class="comment">
+            {{ comentario.texto }}
+        </div>
+    </div>
 </div>
 
+<div *ngIf="cargando && !cargandoLikes" class="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
 
-
+<div *ngIf="!post && !cargando" class="no-post">
+    <p>Post no encontrado.</p>
+</div>
