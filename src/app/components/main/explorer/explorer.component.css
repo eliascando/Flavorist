@@ -24,6 +24,10 @@
     cursor: pointer;
     transition: all 0.5s ease;
 }
+.post > img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
 
 .options {
     position: absolute;
@@ -51,15 +55,4 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
     grid-auto-rows: auto;
-}
-
-.op-like {
-    background-color: #e92222; /* Color de fondo verde */
-    color: white; /* Texto en blanco */
-    padding: 10px 20px; /* Espaciado interno */
-    border: none; /* Sin bordes */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cursor en forma de mano al pasar el ratón */
-    font-size: 16px; /* Tamaño de la fuente */
-    transition: background-color 0.3s; /* Transición suave al cambiar de color */
 }

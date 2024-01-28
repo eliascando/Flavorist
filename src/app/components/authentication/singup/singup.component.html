@@ -1,41 +1,34 @@
-<div class="background">
-    <!-- Columna 1 -->
+<!-- <div class="background">
     <div class="image-column">
         <div class="image-rect" style="background-image: url('../../../assets/img/img1.jpg');"></div>
         <div class="image-rect" style="background-image: url('../../../assets/img/img2.jpg');"></div>
         <div class="image-rect" style="background-image: url('../../../assets/img/img3.jpg');"></div>
     </div>
-    <!-- Columna 2 -->
     <div class="image-column">
         <div class="image-rect" style="background-image: url('../../../assets/img/img5.jpg');"></div>
         <div class="image-rect" style="background-image: url('../../../assets/img/img6.jpg');"></div>
         <div class="image-rect" style="background-image: url('../../../assets/img/img7.jpg');"></div>
     </div>
-    <!-- Columna 3 -->
     <div class="image-column">
       <div class="image-rect" style="background-image: url('../../../assets/img/img8.jpg');"></div>
       <div class="image-rect" style="background-image: url('../../../assets/img/img9.jpg');"></div>
       <div class="image-rect" style="background-image: url('../../../assets/img/img10.jpg');"></div>
   </div>
-  <!-- Columna 4 -->
   <div class="image-column">
       <div class="image-rect" style="background-image: url('../../../assets/img/img4.jpg');"></div>
       <div class="image-rect" style="background-image: url('../../../assets/img/img11.jpg');"></div>
       <div class="image-rect" style="background-image: url('../../../assets/img/img12.jpg');"></div>
   </div>
-  <!-- Columna 5 -->
   <div class="image-column">
     <div class="image-rect" style="background-image: url('../../../assets/img/img13.jpg');"></div>
     <div class="image-rect" style="background-image: url('../../../assets/img/img14.jpg');"></div>
     <div class="image-rect" style="background-image: url('../../../assets/img/img15.jpg');"></div>
   </div>
-  <!-- Columna 6 -->
   <div class="image-column">
     <div class="image-rect" style="background-image: url('../../../assets/img/img16.jpg');"></div>
     <div class="image-rect" style="background-image: url('../../../assets/img/img17.jpg');"></div>
     <div class="image-rect" style="background-image: url('../../../assets/img/img18.jpg');"></div>
   </div>
-  <!-- Columna 7 -->
   <div class="image-column">
   <div class="image-rect" style="background-image: url('../../../assets/img/img19.jpg');"></div>
   <div class="image-rect" style="background-image: url('../../../assets/img/img20.jpg');"></div>
@@ -45,27 +38,80 @@
   </div>
   
   
-  <div class="overlay"></div>
-
+  <div class="overlay"></div> -->
 
 <div class="form-container">
-    <h2>Bienvenido a Flavorist</h2>
-    <h3>Crea tu cuenta!</h3>
-    <img src="../../../assets/logo-small.svg" alt="Logo" class="form-logo">
-    <form>
+  <!--    this.registerForm = this.formBuilder.group({
+      nombres: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      apellidos: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      correo: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      fechaNacimiento: new FormControl('', [Validators.required]),
+      genero: new FormControl('', [Validators.required]),
+      paisID: new FormControl('', [Validators.required]),
+      usuarioTipoID: 1,
+      estado: true,
+      foto: new FormControl(null)
+    });
+  hacer con material angular
+  -->
+    
+  <h1>Regístrate</h1>
+  <form [formGroup]="registerForm">
+    <mat-form-field>
+      <mat-label>Nombres</mat-label>
+      <input matInput formControlName="nombres" required>
+    </mat-form-field>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Tu email" class="rounded-input" formControlName="email">
+    <mat-form-field>
+      <mat-label>Apellidos</mat-label>
+      <input matInput formControlName="apellidos" required>
+    </mat-form-field>
 
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" placeholder="Tu contraseña" class="rounded-input" formControlName="password">
+    <mat-form-field>
+      <mat-label>Correo</mat-label>
+      <input matInput formControlName="correo" required>
+    </mat-form-field>
 
-        <label for="birthdate">Fecha de Nacimiento</label>
-        <input type="date" id="birthdate" name="birthdate" class="rounded-input">
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" required>
+    </mat-form-field>
 
-        <button type="submit" class="continue-btn">Registrar</button>
-        <p class="or-separator">o</p>
-        <button type="button" class="google-btn" (click)="setVolver()">Regresar</button>
-        
-    </form>
+    <mat-form-field>
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input 
+        matInput [matDatepicker]="picker"
+        formControlName="fechaNacimiento" 
+        required
+      >
+      <mat-datepicker-toggle 
+        matIconSuffix [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker 
+        #picker
+      ></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Género</mat-label>
+      <mat-select formControlName="genero" required>
+        <mat-option *ngFor="let genero of generos" [value]="genero.value">
+          {{genero.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>País</mat-label>
+      <mat-select formControlName="paisID" required>
+        <mat-option *ngFor="let pais of paises" [value]="pais.id">
+          {{pais.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary" (click)="register()">Registrarse</button>
+  <p class="or-separator">o</p>
+  <button mat-raised-button color="primary" (click)="setVolver()">Volver</button>
 </div>

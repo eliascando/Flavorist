@@ -1,12 +1,16 @@
 <div class="grid-container">
-    <div *ngFor="let post of posts" class="post" (mouseenter)="showOptions(post)" (mouseleave)="hideOptions(post)">
+    <div class="loading" *ngIf="cargando">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
 
-        <img [src]="post.imagen" alt="Post image">
+    <div *ngFor="let post of posts" class="post" (click)="viewDetails(post)">
 
-        <div class="options" [ngClass]="post.showOptions ? 'visible' : 'hidden'">
-            <button class="op-like">
+        <img src="data:image/jpeg;base64,{{post.imagen}}" alt="Post image">
+
+        <!-- <div class="options" [ngClass]="post.showOptions ? 'showOptions' : 'hideOptions'">
+            <button class="op-like" (click)="darLike(post)">
                 Like
             </button>
-        </div>
+        </div> -->
     </div>
 </div>

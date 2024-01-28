@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ILoginRequest } from 'src/app/interfaces/ILoginRequest';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AuthenticationComponent } from '../authentication.component';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-singin',
@@ -12,16 +11,21 @@ import { Observable } from 'rxjs';
   styleUrls: ['./singin.component.css']
 })
 export class SinginComponent {
-  
-  public form: any;
-  // public servicio: AuthService;
-  public sesion: any = {
-    correo : '',
-    password : ''
-  }
 
+  loginForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router, 
+    private authService: AuthenticationService, 
+    private authComponent: AuthenticationComponent
+  ) {}
+    
   ngOnInit(): void {
-    this.form = this.createMyForm();
+    this.loginForm = this.fb.group({
+      correo: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    })
   }
 
   public setRegister(): void {
@@ -29,17 +33,13 @@ export class SinginComponent {
   }
 
   public async iniciarSesion(){
-    if(this.form.invalid) {
+    if(this.loginForm.invalid) {
       alert('Formulario invalido');
       return;
     }
-    const correo = this.form.get('email').value;
-    const password = this.form.get('password').value;
-    
-    this.sesion.correo = correo;
-    this.sesion.password = password;
-    console.log(this.sesion);
-    let response = this.authService.login(this.sesion as ILoginRequest);
+  
+    console.log(this.loginForm.value);
+    let response = this.authService.login(this.loginForm.value as ILoginRequest);
     console.log(response);
     if(response) {
       console.log('Usuario logueado', response);
@@ -49,14 +49,4 @@ export class SinginComponent {
     }
 
   }
-
-  private createMyForm(): FormGroup {
-    return this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    })
-  }
-
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthenticationService, private authComponent: AuthenticationComponent) {}
-
 }

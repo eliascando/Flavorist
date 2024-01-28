@@ -145,9 +145,11 @@
       </mat-form-field>
       <button (click)="addItem(newItemInput.value)">Añadir Paso</button>
     </form>
-    <button (click)="guardarReceta()" class="guardarReceta">Guardar Receta</button>
+    <button 
+      (click)="guardarReceta()" 
+      class="guardarReceta"
+      [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid || disableButton"
+    >Guardar Receta</button>
   </mat-step>
-
-  <!-- Otros pasos si son necesarios -->
 
 </mat-stepper>

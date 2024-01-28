@@ -7,6 +7,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { IRecetaIngrediente } from 'src/app/interfaces/IRecetaIngrediente';
 import { IRecetaPaso } from 'src/app/interfaces/IRecetaPasos';
 import { PostServiceService } from 'src/app/services/post-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-post-creation',
@@ -29,9 +30,17 @@ export class PostCreationComponent {
   ingredientes: IRecetaIngrediente[] = [];
   receta: any = {};
 
+  publicado: boolean = false;
+  disableButton: boolean = false;
+
   @ViewChild('newItemInput') newItemInput: ElementRef;
 
-  constructor(private postService: PostServiceService,private catalog: CatalogService, private formBuilder: FormBuilder) { }
+  constructor(
+    private postService: PostServiceService,
+    private catalog: CatalogService, 
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.catalog.getRecetaCategoria().then((res) => {
@@ -130,6 +139,7 @@ export class PostCreationComponent {
   
 
   guardarReceta() {
+    this.disableButton = true;
     this.receta = {
       imagen: this.firstFormGroup.get('imagen')?.value,
       usuarioID: '',
@@ -146,8 +156,24 @@ export class PostCreationComponent {
     console.log(this.receta);
     this.postService.savePost(this.receta).then((res) => {
       console.log(res);
+      if(res.id){
+        this.publicado = true;
+        this.firstFormGroup.reset();
+        this.secondFormGroup.reset();
+        this.thirdFormGroup.reset();
+        this.pasos = [];
+        this.ingredientes = [];
+        this.disableButton = false;
+        // Aviso de receta creada
+        this.snackBar.open('Receta creada con éxito', 'Cerrar', {
+          duration: 3000 // Aviso se cierra después de 3 segundos
+        });
+      }
     }).catch((err) => {
       console.error(err);
+      this.snackBar.open('Error al guardar la receta', 'Cerrar', {
+        duration: 3000
+      });
     });
   }
 

@@ -1,0 +1,5 @@
+<mat-list-item *ngFor="let user of users" (click)="irAlPerfil(user)">
+    
+    <img matListItemAvatar src="data:image/jpeg;base64,{{user.foto}}" *ngIf="user.foto">
+    <h3 matListItemTitle>{{user.nombres}} {{user.apellidos}}</h3>
+</mat-list-item>

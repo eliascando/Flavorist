@@ -22,7 +22,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatBadgeModule} from '@angular/material/badge';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
@@ -39,6 +43,9 @@ import { PostDetailsComponent } from './components/main/post-details/post-detail
 import { AuthenticationService } from './services/authentication.service';
 import { PostServiceService } from './services/post-service.service';
 import { CatalogService } from './services/catalog.service';
+import { UsuarioService } from './services/usuario.service';
+import { ActionsService } from './services/actions.service';
+import { LikesOwnersComponent } from './components/main/post-details/likes-owners/likes-owners.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +60,8 @@ import { CatalogService } from './services/catalog.service';
     ProfileComponent,
     NavBarMainComponent,
     AppComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    LikesOwnersComponent
   ],
   imports: [
     BrowserModule,
@@ -78,13 +86,23 @@ import { CatalogService } from './services/catalog.service';
     MatDatepickerModule,
     MatNativeDateModule,
     MatPaginatorModule,
+    MatTooltipModule,
     MatSortModule,
     MatSnackBarModule,
     MatStepperModule,
+    MatProgressSpinnerModule,
+    MatBadgeModule,
+    MatDialogModule,
     DragDropModule,
     CommonModule
   ],
-  providers: [AuthenticationService, PostServiceService, CatalogService],
+  providers: [
+    AuthenticationService, 
+    PostServiceService, 
+    CatalogService, 
+    UsuarioService,
+    ActionsService
+  ],
   bootstrap: [AppComponent, Router]
 })
 export class AppModule { }

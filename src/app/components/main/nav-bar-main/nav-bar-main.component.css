@@ -122,3 +122,20 @@ input[type="search"] {
     border-radius: 10px;
     transition: background-color 0.3s;
 }
+
+.icons-navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 2vw;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+    font-size: 1.5rem;
+}
+
+.icons-navbar:hover{
+    background-color: #e9e9e9;
+    cursor: pointer;
+}

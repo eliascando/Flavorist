@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { IPostFeed } from 'src/app/interfaces/IPostFeed';
+import { PostServiceService } from 'src/app/services/post-service.service';
 
 @Component({
   selector: 'app-explorer',
@@ -7,80 +10,45 @@ import { Component } from '@angular/core';
 })
 export class ExplorerComponent {
 
-  constructor() { }
+  posts: IPostFeed[] = [];
+  postsOverload: any[] = [];
+  cargando: boolean = true;
 
+  constructor(
+    private postService: PostServiceService,
+    private router: Router
+  ) { }
 
-  private entro: boolean = false;
-
-  public posts: any[] = [
-    {
-      titulo: 'Post 1',
-      descripcion: 'Descripcion del post 10',
-      imagen: './../../../../assets/img/img10.jpg',
-      showOptions: false
-    },
-    {
-      titulo: 'Post 2',
-      descripcion: 'Descripcion del post 11',
-      imagen: './../../../../assets/img/img12.jpg',
-      showOptions: false
-    },
-    {
-      titulo: 'Post 3',
-      descripcion: 'Descripcion del post 12',
-      imagen: './../../../../assets/img/img13.jpg',
-      showOptions: false
-    },
-    {
-      titulo: 'Post 4',
-      descripcion: 'Descripcion del post 13',
-      imagen: './../../../../assets/img/img14.jpg',
-      showOptions: false
-    },
-    {
-      titulo: 'Post 5',
-      descripcion: 'Descripcion del post 14',
-      imagen: './../../../../assets/img/img15.jpg',
-      showOptions: false
-    },
-    {
-      titulo: 'Post 6',
-      descripcion: 'Descripcion del post 15',
-      imagen: './../../../../assets/img/img16.jpg',
-      showOptions: false
-    },
-    {
-      titulo: 'Post 7',
-      descripcion: 'Descripcion del post 16',
-      imagen: './../../../../assets/img/img17.jpg',
-      showOptions: false
-    },
-    {
-      titulo: 'Post 8',
-      descripcion: 'Descripcion del post 17',
-      imagen: './../../../../assets/img/img18.jpg',
-      showOptions: false
-    },
-    {
-      titulo: 'Post 9',
-      descripcion: 'Descripcion del post 4',
-      imagen: './../../../../assets/img/img19.jpg',
-      showOptions: false
-    },
-    {
-      titulo: 'Post 10',
-      descripcion: 'Descripcion del post 3',
-      imagen: './../../../../assets/img/img10.jpg',
-      showOptions: false
-    }
-  ];
-
-  showOptions(post: any) {
-    post.showOptions = true;
+  async ngOnInit(): Promise<void>{
+    this.posts = await this.postService.getExplorePosts();
+    // this.postsOverload = this.posts;
+    // this.postsOverload.forEach((post) => {
+    //   post.showOptions = false;
+    // });
+    // console.log(this.postsOverload);
+    this.cargando = false;
   }
 
-  hideOptions(post: any) {
-      post.showOptions = false;
+  viewDetails(post: any) {
+    console.log('viewDetails',post);
+    this.router.navigateByUrl(`/post-details/${post.id}`);
   }
 
+  // showOptions(post: any) {
+  //   this.postsOverload = this.postsOverload.map(p => 
+  //     p.postID === post.postID ? { ...p, showOptions: true } : p
+  //   );
+  //   console.log('showOptions',post);
+  // }
+
+  // hideOptions(post: any) {
+  //   this.postsOverload = this.postsOverload.map(p => 
+  //     p.postID === post.postID ? { ...p, showOptions: false } : p
+  //   );
+  //   console.log('hideOptions',post);
+  // }
+
+  // darLike(post: any){
+  //   console.log('like al post: ',post.postID);
+  // }
 }
