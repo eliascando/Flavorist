@@ -1,4 +1,5 @@
 <div id="auth" *ngIf="!isLogged()">
-    <app-singin *ngIf="!singup"></app-singin>
-    <app-singup *ngIf="singup"></app-singup>
+    <app-singin *ngIf="!singup && !forgotPass"></app-singin>
+    <app-singup *ngIf="singup && !forgotPass"></app-singup>
+    <app-forgot-pass *ngIf="forgotPass"></app-forgot-pass>
 </div>

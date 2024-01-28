@@ -1,0 +1,20 @@
+<div>
+    <div class="form-container">
+        <img src="../../../assets/logo-small.svg" alt="Logo" class="form-logo">
+        <h2>Recuperar contraseña</h2>
+        <form [formGroup]="forgotPassForm" (ngSubmit)="recuperarContrasena()">
+            <mat-form-field>
+                <mat-label>Correo</mat-label>
+                <input matInput formControlName="correo" required type="email">
+            </mat-form-field>
+        </form>
+        <button mat-raised-button color="primary">Enviar Correo</button>
+
+        <p class="or-separator">o</p>
+
+        <button 
+            (click)="volver()"
+            mat-raised-button color="primary"
+        >Volver</button>
+    </div>
+</div>

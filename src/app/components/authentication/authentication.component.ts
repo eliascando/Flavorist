@@ -11,6 +11,7 @@ export class AuthenticationComponent {
     constructor(private authService: AuthenticationService) { }
     
     @Input() singup: boolean;
+    @Input() forgotPass: boolean;
 
     public isLogged(): boolean {
       //console.log(this.authService.isLogged());

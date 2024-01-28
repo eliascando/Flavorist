@@ -32,6 +32,10 @@ export class SinginComponent {
     this.authComponent.singup = true;
   }
 
+  public setForgot(): void {
+    this.authComponent.forgotPass = true;
+  }
+
   public async iniciarSesion(){
     if(this.loginForm.invalid) {
       alert('Formulario invalido');

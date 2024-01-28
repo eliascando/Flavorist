@@ -46,6 +46,7 @@ import { CatalogService } from './services/catalog.service';
 import { UsuarioService } from './services/usuario.service';
 import { ActionsService } from './services/actions.service';
 import { LikesOwnersComponent } from './components/main/post-details/likes-owners/likes-owners.component';
+import { ForgotPassComponent } from './components/authentication/forgot-pass/fogot-pass.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { LikesOwnersComponent } from './components/main/post-details/likes-owner
     NavBarMainComponent,
     AppComponent,
     PostDetailsComponent,
-    LikesOwnersComponent
+    LikesOwnersComponent,
+    ForgotPassComponent
   ],
   imports: [
     BrowserModule,
